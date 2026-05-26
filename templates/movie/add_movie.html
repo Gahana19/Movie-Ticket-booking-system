@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block body %}
+<main class="app-main">
+  <div class="app-content-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h3 class="mb-0">ADD MOVIE</h3>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-end">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ADD MOVIE</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          {% if form.errors or form.non_field_errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> Please correct the following:
+            <ul class="mb-0">
+              {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+              {% for field, errors in form.errors.items %}
+              {% for error in errors %}<li>{{ field|title }}: {{ error }}</li>{% endfor %}
+              {% endfor %}
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endif %}
+
+          <form class="row g-3 needs-validation" method="POST" action="{% url 'add_movie' %}" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+
+            <div class="col-md-4">
+              <label class="form-label">Movie ID</label>
+              {{ form.movie_id }}
+              <div class="invalid-feedback">
+                {% if form.movie_id.errors %}{{ form.movie_id.errors.0 }}{% else %}Please provide a valid ID.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Movie Name</label>
+              {{ form.movie_name }}
+              <div class="invalid-feedback">
+                {% if form.movie_name.errors %}{{ form.movie_name.errors.0 }}{% else %}Please provide a valid name (3-12 characters).{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Genre</label>
+              {{ form.genre }}
+              <div class="invalid-feedback">
+                {% if form.genre.errors %}{{ form.genre.errors.0 }}{% else %}Please select a valid genre.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Language</label>
+              {{ form.language }}
+              <div class="invalid-feedback">
+                {% if form.language.errors %}{{ form.language.errors.0 }}{% else %}Please select a valid language.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Duration</label>
+              {{ form.duration }}
+              <div class="invalid-feedback">
+                {% if form.duration.errors %}{{ form.duration.errors.0 }}{% else %}Duration must not exceed 3 hours.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Release Date</label>
+              {{ form.release_date }}
+              <div class="invalid-feedback">
+                {% if form.release_date.errors %}{{ form.release_date.errors.0 }}{% else %}Please provide a valid future date.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Showtimes</label>
+              {{ form.showtimes }}
+              <div class="invalid-feedback">
+                {% if form.showtimes.errors %}{{ form.showtimes.errors.0 }}{% else %}Accepted format: 10am,11am,2pm,6pm,9pm.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Ticket Price</label>
+              {{ form.ticket_price }}
+              <div class="invalid-feedback">
+                {% if form.ticket_price.errors %}{{ form.ticket_price.errors.0 }}{% else %}Please enter a valid price.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Upload Image</label>
+              
+              {{ form.image }}
+              <div class="invalid-feedback">
+                {% if form.image.errors %}{{ form.image.errors.0 }}{% else %}Accepted formats: .jpg, .jpeg, .png. Max size 2MB.{% endif %}
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" required>
+                <label class="form-check-label">Agree to terms and conditions</label>
+                <div class="invalid-feedback">You must agree before submitting.</div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

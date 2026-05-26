@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+       <!--begin::App Main-->
+       <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">ADMIN DASHBOARD</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">ADMIN DASHBOARD</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card mb-4">
+                  <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Online Store Visitors</h3>
+                      <a
+                        href="javascript:void(0);"
+                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        >View Report</a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <p class="d-flex flex-column">
+                        <span class="fw-bold fs-5">820</span> <span>Visitors Over Time</span>
+                      </p>
+                      <p class="ms-auto d-flex flex-column text-end">
+                        <span class="text-success"> <i class="bi bi-arrow-up"></i> 12.5% </span>
+                        <span class="text-secondary">Since last week</span>
+                      </p>
+                    </div>
+                    <!-- /.d-flex -->
+                    <div class="position-relative mb-4"><div id="visitors-chart"></div></div>
+                    <div class="d-flex flex-row justify-content-end">
+                      <span class="me-2">
+                        <i class="bi bi-square-fill text-primary"></i> This Week
+                      </span>
+                      <span> <i class="bi bi-square-fill text-secondary"></i> Last Week </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Recent Bookings</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table m-0">
+                        <thead>
+                          <tr>
+                            <th>Booking ID</th>
+                            <th>Movie name</th>
+                            <th>Seats</th>
+                            <th>Amount</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <a
+                                href="pages/examples/invoice.html"
+                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                >001</a
+                              >
+                            </td>
+                            <td> Oon ko sweater</td>
+                            <td><span class="badge text-bg-success">S1,S2</span></td>
+                            <td> RS.300<div id="table-sparkline-1"></div></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                href="pages/examples/invoice.html"
+                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                >O02</a
+                              >
+                            </td>
+                            <td>HOUSEFULL 5</td>
+                            <td><span class="badge text-bg-success">S3</span></td>
+                            <td>RS.300<div id="table-sparkline-2"></div></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                href="pages/examples/invoice.html"
+                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                >003</a
+                              >
+                            </td>
+                            <td>Ke ghar ke dera no.2</td>
+                            <td><span class="badge text-bg-success"> S4</span></td>
+                            <td>RS.300<div id="table-sparkline-3"></div></td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                href="pages/examples/invoice.html"
+                                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                                >004</a
+                              >
+                            </td>
+                            <td>KHEL</td>
+                            <td><span class="badge text-bg-success">S5</span></td>
+                            <td>RS.300<div id="table-sparkline-4"></div></td>
+                          </tr>
+                          
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer clearfix">
+                    
+                    <a href="javascript:void(0)" class="btn btn-sm btn-primary float-end">
+                      View All Booking
+                    </a>
+                  </div>
+                  <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+              </div>
+              <!-- /.col-md-6 -->
+              <div class="col-lg-6">
+                <div class="card mb-4">
+                  <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                      <h3 class="card-title">Ticket Sales</h3>
+                      <a
+                        href="javascript:void(0);"
+                        class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        >View Report</a
+                      >
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-flex">
+                      <p class="d-flex flex-column">
+                        <span class="fw-bold fs-5">RS.8,230.00</span> <span>Sales Over Time</span>
+                      </p>
+                      <p class="ms-auto d-flex flex-column text-end">
+                        <span class="text-success"> <i class="bi bi-arrow-up"></i> 33.1% </span>
+                        <span class="text-secondary">Since Past Year</span>
+                      </p>
+                    </div>
+                    <!-- /.d-flex -->
+                    <div class="position-relative mb-4"><div id="sales-chart"></div></div>
+                    <div class="d-flex flex-row justify-content-end">
+                      <span class="me-2">
+                        <i class="bi bi-square-fill text-primary"></i> This year
+                      </span>
+                      <span> <i class="bi bi-square-fill text-secondary"></i> Last year </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card -->
+                <div class="card direct-chat direct-chat-warning">
+                  <div class="card-header">
+                    <h3 class="card-title">Direct Chat</h3>
+                    <div class="card-tools">
+                      <span title="3 New Messages" class="badge text-bg-warning"> 3 </span>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-collapse"
+                      >
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        title="Contacts"
+                        data-lte-toggle="chat-pane"
+                      >
+                        <i class="bi bi-chat-text-fill"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                      <!-- Message. Default to the start -->
+                      <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-start"> Supriya DC </span>
+                          <span class="direct-chat-timestamp float-end"> 23 May 2:00 pm </span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img
+                          class="direct-chat-img"
+                          src="../static/Assets/s.jpg"
+                          alt="message user image"
+                        />
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                          Hi, I want to book tickets for a movie at Mana Kashi Cineplex.
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+                      <!-- Message to the end -->
+                      <div class="direct-chat-msg end">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-end"> Gahana Pokhrel </span>
+                          <span class="direct-chat-timestamp float-start">
+                            23 May 2:05 pm
+                          </span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img
+                          class="direct-chat-img"
+                          src="../static/Assets/gg.jpg"
+                          alt="message user image"
+                        />
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">Hello! 👋 Welcome to Mana Kashi Cineplex.
+                           I’d be happy to help you with your booking. 
+                          May I know which movie you’d like to watch?</div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+                      <!-- Message. Default to the start -->
+                      <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-start"> Supriya DC </span>
+                          <span class="direct-chat-timestamp float-end"> 23 May 5:37 pm </span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img
+                          class="direct-chat-img"
+                          src="../static/Assets/s.jpg"
+                          alt="message user image"
+                        />
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                          I want to book tickets for "Pushpa 2".
+                        </div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+                      <!-- Message to the end -->
+                      <div class="direct-chat-msg end">
+                        <div class="direct-chat-infos clearfix">
+                          <span class="direct-chat-name float-end"> Gahana Pokhrel </span>
+                          <span class="direct-chat-timestamp float-start">
+                            23 May 6:10 pm
+                          </span>
+                        </div>
+                        <!-- /.direct-chat-infos -->
+                        <img
+                          class="direct-chat-img"
+                          src="../static/Assets/gg.jpg"
+                          alt="message user image"
+                        />
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">Great choice! 🎬 Could you please 
+                          let me know your preferred date, showtime, and the number of tickets?.</div>
+                        <!-- /.direct-chat-text -->
+                      </div>
+                      <!-- /.direct-chat-msg -->
+                    </div>
+                    <!-- /.direct-chat-messages-->
+                    <!-- Contacts are loaded here -->
+                   
+                    <!-- /.direct-chat-pane -->
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <form action="#" method="post">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          name="message"
+                          placeholder="Type Message ..."
+                          class="form-control"
+                        />
+                        <span class="input-group-append">
+                          <button type="button" class="btn btn-warning">Send</button>
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.card-footer-->
+                </div>
+              </div>
+              <!-- /.col-md-6 -->
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+      {% endblock %}
+      

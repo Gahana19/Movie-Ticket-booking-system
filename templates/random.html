@@ -1,0 +1,299 @@
+<div class="container-fluid">
+    <div class="row d-flex flex-wrap gap-3 justify-content-center">
+      
+      <div class="card" style="width: 18rem;">
+        <img src="../static/Assets/12.jpg" class="card-img-top" alt="...">
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="../static/Assets/21.jpg" class="card-img-top" alt="...">
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="../static/Assets/pic1.jpeg" class="card-img-top" alt="...">
+      </div>
+  
+    </div>
+  </div>
+  
+
+
+
+
+
+
+  def __init__(self, *args, **Kwargs):
+  super().__init__(*args,**Kwargs) 
+  #name validations
+  self.fields['movie_name'].validators.append(
+   RegexValidator(
+  regex=r"^[A-Za-z]{3,12}+$",
+  message="movie name should be more than 3 or less then 12 character long"
+  )
+  )
+ 
+  self.fields['genre'].validators.append(
+  RegexValidator(
+  regex=r"^[A-Za-z]{3,12}+$",
+  message="movie genre should be more than 3 or less then 12 character long"
+  )
+  )
+  self.fields['language'].validators.append(
+      RegexValidator(
+
+      )
+  )
+  self.fields['release_date'].validators.append(
+      RegexValidator(
+          regex=r'^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$',
+          message="Enter a valid date in YYYY-MM-DD format"
+      )
+  )
+  self.fields['ticket_price'].validators.append(
+      RegexValidator(
+      regex=r'^\d+(\.\d{1,2,3})?$',
+      message='Enter a valid price (up to 3 decimal places).'
+      )
+  )
+
+
+
+
+
+
+  {% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="{% static 'css/login.css'%}">
+</head>
+<body>
+  <div class="login-container" >
+    <h2>Sign Up</h2>
+
+    {% if messages %}
+      <div class="alert alert-info">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form action="{%url 'signup'%}" method = "POST">
+      {% csrf_token %}
+
+      <div class="input-group">
+        <label for="new-username">first_name</label>
+        <input type="text" name="first_name" required>
+      </div>
+      <div class="input-group">
+        <label for="new-username">last_name</label>
+        <input type="text" name="last_name" required>
+      </div>
+      <div class="input-group">
+        <label for="new-username">Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="input-group">
+        <label for="new-password">Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <div class="input-group">
+        <label for="new-password">Confirm Password</label>
+        <input type="password" name="password" required>
+      </div>
+      
+      <button type="Submit" class="login-btn">Register</button>
+      
+     
+      
+    </form>
+
+    <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+  </div>
+  
+
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def clean_showtimes(self):
+showtimes_input = self.cleaned_data.get('showtimes', '')
+
+# Acceptable time format: e.g., 10am, 2pm, 11am
+time_pattern = re.compile(r'^(1[0-2]|0?[1-9])(am|pm)$',re.IGNORECASE)
+times = [t.strip().lower() for t in showtimes_input.split(',') if t.strip()]
+
+if not times:
+    raise forms.ValidationError("Please enter at least one showtime.")
+
+for time in times:
+    if not time_pattern.match(time):
+        raise forms.ValidationError(f"Invalid time format: {time}. Use format like 10am, 2pm.")
+
+# Optional: Check for duplicates
+if len(times) != len(set(times)):
+    raise forms.ValidationError("Duplicate showtimes are not allowed.")
+
+return ','.join(times)  # store as normalized, comma-separated string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'base.html' %}
+{% block  body %}
+
+       <!--begin::App Main-->
+    <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">UPDATE MOVIE DESCRIPTION </h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">UPDATE MOVIE DESCRIPTION</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                {% if form.errors or form.non_field_errors  %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong> Error!</strong> Please correct the following:
+                  <ul class="mb-0">
+                    {% for error in form.non_field_errors %}
+                    <li> {{error}}</li>
+                    {% endfor %}
+                    {%for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                    <li> {{ field|title }}: {{error}}</li>
+                    {% endfor %}
+                    {% endfor %}
+                  </ul>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+                {% endif %}
+                <form class="row g-3 needs-validation" novalidate method='POST', action="{%url 'update_movie' id %}">
+                  {%csrf_token%}
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">ID</label>
+                    {{form.movie_id}}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="validationCustom01" class="form-label">movie_name</label>
+                    {{form.movie_name}}
+                    {% for error in form.movie_name.errors%}
+                    <span class="text-danger">{{error}}</span>
+                    {% endfor %}
+                  </div>
+
+
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">upload Image</label>
+                    {%if form.image%}
+                    <img src="{{post_data.image.url}}" />
+                     {% endif %} {{post_data.image}}
+                  </div>
+
+
+
+                  <div class="col-md-4">
+                    <label for="validationCustom02" class="form-label">genre</label>
+                    {{form.genre}}   
+                  </div>                 
+                  <div class="col-md-4">
+                    <label for="validationCustomUsername" class="form-label">language</label>
+                    <div class="input-group has-validation">
+                      {{form.language}}                      
+                    </div>
+                  </div>
+                  <hr class="divider" />
+                  <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label">duration</label>
+                    {{form.duration}}
+                    <div class="invalid-feedback">                     
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom04" class="form-label">release_date</label>
+                    {{form.release_date}}                      
+                    <div class="invalid-feedback">                    
+                    </div>
+                  </div>
+                  <hr class="divider" />
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">showtimes</label>
+                    {{form.showtimes}}
+                    <div class="invalid-feedback">                    
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="validationCustom05" class="form-label">ticket_price</label>
+                    {{form.ticket_price}}
+                    <div class="invalid-feedback">                     
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                      </label>
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Update</button>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-1"></div>
+
+               </div>
+          </div>
+        </div>
+    </main>
+
+{% endblock %}

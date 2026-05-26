@@ -1,0 +1,41 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .ticket {
+    background-color: #fff;
+    border: 2px dashed #aaa;
+    border-radius: 12px;
+    width: 360px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ticket h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 20px;
+  }
+  
+  .details p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .details span {
+    color: #555;
+  }
+  
+  .footer {
+    margin-top: 25px;
+    text-align: center;
+    font-style: italic;
+    color: #888;
+  }
+  
